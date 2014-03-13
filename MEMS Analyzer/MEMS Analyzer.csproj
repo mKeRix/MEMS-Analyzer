@@ -114,6 +114,8 @@
     <Compile Include="Content\Data\AccelVisual.xaml.cs">
       <DependentUpon>AccelVisual.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Data\SensorData.cs" />
+    <Compile Include="Content\Data\SensorViewModel.cs" />
     <Compile Include="Content\Data\SurrVisual.xaml.cs">
       <DependentUpon>SurrVisual.xaml</DependentUpon>
     </Compile>
@@ -228,6 +230,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Driver\11D-Driver.inf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
