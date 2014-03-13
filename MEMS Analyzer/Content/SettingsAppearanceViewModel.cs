@@ -15,8 +15,8 @@ namespace MEMS_Analyzer.Content
     public class SettingsAppearanceViewModel
         : NotifyPropertyChanged
     {
-        private const string FontSmall = "small";
-        private const string FontLarge = "large";
+        private const string FontSmall = "klein";
+        private const string FontLarge = "groß";
 
         // 9 accent colors from metro design principles
         /*private Color[] accentColors = new Color[]{
@@ -63,8 +63,8 @@ namespace MEMS_Analyzer.Content
         public SettingsAppearanceViewModel()
         {
             // add the default themes
-            this.themes.Add(new Link { DisplayName = "dark", Source = AppearanceManager.DarkThemeSource });
-            this.themes.Add(new Link { DisplayName = "light", Source = AppearanceManager.LightThemeSource });
+            this.themes.Add(new Link { DisplayName = "dunkel", Source = AppearanceManager.DarkThemeSource });
+            this.themes.Add(new Link { DisplayName = "hell", Source = AppearanceManager.LightThemeSource });
 
             this.SelectedFontSize = AppearanceManager.Current.FontSize == FontSize.Large ? FontLarge : FontSmall;
             SyncThemeAndColor();
