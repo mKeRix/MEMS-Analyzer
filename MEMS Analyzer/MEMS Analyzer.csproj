@@ -72,10 +72,66 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Content\Data\AccelData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Data\AccelVisual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Data\SurrVisual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Data\GyroData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Data\GyroVisual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Data\MagnetoData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Data\MagnetoVisual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Data\SurrData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Content\Data\AccelData.xaml.cs">
+      <DependentUpon>AccelData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Data\AccelVisual.xaml.cs">
+      <DependentUpon>AccelVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Data\SurrVisual.xaml.cs">
+      <DependentUpon>SurrVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Data\GyroData.xaml.cs">
+      <DependentUpon>GyroData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Data\GyroVisual.xaml.cs">
+      <DependentUpon>GyroVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Data\MagnetoData.xaml.cs">
+      <DependentUpon>MagnetoData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Data\MagnetoVisual.xaml.cs">
+      <DependentUpon>MagnetoVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Data\SurrData.xaml.cs">
+      <DependentUpon>SurrData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -95,6 +151,30 @@
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\SettingsAppearanceViewModel.cs" />
+    <Page Include="Pages\Data\Gyroscope.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Data\Magnetoscope.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Data\Surroundings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Device.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Data\Acceleration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Data\General.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +183,24 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Pages\Data\Gyroscope.xaml.cs">
+      <DependentUpon>Gyroscope.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Data\Magnetoscope.xaml.cs">
+      <DependentUpon>Magnetoscope.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Data\Surroundings.xaml.cs">
+      <DependentUpon>Surroundings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Device.xaml.cs">
+      <DependentUpon>Device.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Data\Acceleration.xaml.cs">
+      <DependentUpon>Acceleration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Data\General.xaml.cs">
+      <DependentUpon>General.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>

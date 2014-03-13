@@ -9,7 +9,17 @@
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="wilkommen">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="startseite" Source="/Pages/Home.xaml" />
+                <mui:Link DisplayName="STARTSEITE" Source="/Pages/Home.xaml" />
+                <mui:Link DisplayName="GERÄT" Source="/Pages/Device.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="daten">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="ALLGEMEIN" Source="/Pages/Data/General.xaml" />
+                <mui:Link DisplayName="BESCHLEUNIGUNG   " Source="/Pages/Data/Acceleration.xaml" />
+                <mui:Link DisplayName="GYRO" Source="/Pages/Data/Gyroscope.xaml" />
+                <mui:Link DisplayName="MAGNETO" Source="/Pages/Data/Magnetoscope.xaml" />
+                <mui:Link DisplayName="UMGEBUNG" Source="/Pages/Data/Surroundings.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="einstellungen" GroupName="settings">
