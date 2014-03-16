@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
+using MEMS_Analyzer.Content.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace MEMS_Analyzer
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new SensorViewModel();
         }
     }
 }
