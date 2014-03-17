@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Research.DynamicDataDisplay.DataSources;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -29,6 +30,8 @@ namespace MEMS_Analyzer.Content.Data
                 // notify of changes
                 NotifyPropertyChanged("dataItems");
                 NotifyPropertyChanged("lastItem");
+                // update any charts
+                NotifyPropertyChanged("AccelXData");
             }
         }
 
@@ -41,6 +44,48 @@ namespace MEMS_Analyzer.Content.Data
         {
             dataItems.Add(new SensorData { id = 0, accelX = 0.231, accelY = 0.345, accelZ = -1.234 });
             dataItems.Add(new SensorData { id = 1, accelX = 1.231, accelY = 1.345, accelZ = -0.234 });
+        }
+
+        private CompositeDataSource _AccelXData;
+        public CompositeDataSource AccelXData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<int>(dataItems.Select(v => v.id));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(dataItems.Select(v => v.accelX));
+                yData.SetYMapping(y => y);
+                _AccelXData = xData.Join(yData);
+                return _AccelXData;
+            }
+        }
+
+        private CompositeDataSource _AccelYData;
+        public CompositeDataSource AccelYData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<int>(dataItems.Select(v => v.id));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(dataItems.Select(v => v.accelY));
+                yData.SetYMapping(y => y);
+                _AccelYData = xData.Join(yData);
+                return _AccelYData; 
+            }
+        }
+
+        private CompositeDataSource _AccelZData;
+        public CompositeDataSource AccelZData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<int>(dataItems.Select(v => v.id));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(dataItems.Select(v => v.accelY));
+                yData.SetYMapping(y => y);
+                _AccelZData = xData.Join(yData);
+                return _AccelZData;
+            }
         }
 
         // handle property changes

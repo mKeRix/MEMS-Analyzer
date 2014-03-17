@@ -4,14 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" 
+             xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignData /SampleData/SampleSensorData.xaml}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
-        <ScrollViewer>
-            <StackPanel MinWidth="200">
-                <TextBlock Text="BESCHLEUNIGUNG" Style="{StaticResource Heading2}" />
-                <TextBlock Text="TODO: Diagramm einfügen" />
-            </StackPanel>
-        </ScrollViewer>
+        <DockPanel MinWidth="200">
+            <TextBlock Text="BESCHLEUNIGUNG" Style="{StaticResource Heading2}" DockPanel.Dock="Top" />
+            <d3:ChartPlotter Name="plotter" DockPanel.Dock="Top" Margin="5">
+                <d3:VerticalAxisTitle Content="Beschleunigung in g" />
+                <d3:HorizontalAxisTitle Content="Datensatz" />
+                <d3:LineGraph DataSource="{Binding AccelXData}" />
+                <d3:LineGraph DataSource="{Binding AccelYData}" />
+                <d3:LineGraph DataSource="{Binding AccelZData}" />
+            </d3:ChartPlotter>
+        </DockPanel>
     </Grid>
 </UserControl>

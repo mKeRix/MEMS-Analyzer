@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:local="clr-namespace:MEMS_Analyzer.Content"
              mc:Ignorable="d"
              d:DataContext="{d:DesignData /SampleData/SampleSensorData.xaml}"
              d:DesignHeight="300" d:DesignWidth="300">
@@ -13,15 +12,15 @@
             <StackPanel MinWidth="200">
                 <TextBlock Text="BESCHLEUNIGUNG" Style="{StaticResource Heading2}" />
                 <TextBlock>
-                    <Run Text="x-Achse:" />
+                    <Run Text="x-Achse:" FontStyle="Italic" />
                     <Run Text="{Binding lastItem.accelX}"  />
                 </TextBlock>
                 <TextBlock>
-                    <Run Text="y-Achse:" />
+                    <Run Text="y-Achse:" FontStyle="Italic" />
                     <Run Text="{Binding lastItem.accelY}"  />
                 </TextBlock>
                 <TextBlock>
-                    <Run Text="z-Achse:" />
+                    <Run Text="z-Achse:" FontStyle="Italic" />
                     <Run Text="{Binding lastItem.accelZ}"  />
                 </TextBlock>
             </StackPanel>
