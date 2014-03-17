@@ -117,6 +117,7 @@
     <Compile Include="Content\Data\AccelVisual.xaml.cs">
       <DependentUpon>AccelVisual.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Data\SensorConnection.cs" />
     <Compile Include="Content\Data\SensorData.cs" />
     <Compile Include="Content\Data\SensorViewModel.cs" />
     <Compile Include="Content\Data\SurrVisual.xaml.cs">

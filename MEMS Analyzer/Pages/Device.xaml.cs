@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MEMS_Analyzer.Content.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,21 @@ namespace MEMS_Analyzer.Pages
     /// <summary>
     /// Interaction logic for BasicPage1.xaml
     /// </summary>
-    public partial class BasicPage1 : UserControl
+    public partial class Device : UserControl
     {
-        public BasicPage1()
+        public Device()
         {
             InitializeComponent();
+        }
+
+        private void ButtonConnect_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (SensorViewModel)this.DataContext;
+            if (viewModel.sensorConn.connectPort(ComboBoxPorts.Text))
+            {
+                // add more logic to this
+                System.Diagnostics.Debug.WriteLine("Connected");
+            }
         }
     }
 }

@@ -14,11 +14,15 @@ namespace MEMS_Analyzer.Content.Data
     {
         public SensorViewModel()
         {
+            sensorConn = new SensorConnection();
+
             dataItems = new ObservableCollection<SensorData>();
             dataItems.CollectionChanged += dataItems_CollectionChanged;
 
             LoadData();
         }
+
+        public SensorConnection sensorConn { get; set; }
 
         private ObservableCollection<SensorData> _dataItems;
         public ObservableCollection<SensorData> dataItems
@@ -32,6 +36,8 @@ namespace MEMS_Analyzer.Content.Data
                 NotifyPropertyChanged("lastItem");
                 // update any charts
                 NotifyPropertyChanged("AccelXData");
+                NotifyPropertyChanged("AccelYData");
+                NotifyPropertyChanged("AccelZData");
             }
         }
 
