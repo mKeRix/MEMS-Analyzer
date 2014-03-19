@@ -31,7 +31,7 @@ namespace MEMS_Analyzer.Pages
             var viewModel = (SensorViewModel)this.DataContext;
             if (viewModel.sensorConn.connectPort(ComboBoxPorts.Text))
             {
-                // add more logic to this
+                // TODO: add more logic to this
                 System.Diagnostics.Debug.WriteLine("Connected");
             }
         }

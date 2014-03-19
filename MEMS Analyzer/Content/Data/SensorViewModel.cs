@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace MEMS_Analyzer.Content.Data
         public SensorViewModel()
         {
             sensorConn = new SensorConnection();
+            sensorConn.sensorPort.DataReceived += sensorPort_DataReceived;
 
             dataItems = new ObservableCollection<SensorData>();
             dataItems.CollectionChanged += dataItems_CollectionChanged;
@@ -92,6 +94,16 @@ namespace MEMS_Analyzer.Content.Data
                 _AccelZData = xData.Join(yData);
                 return _AccelZData;
             }
+        }
+
+        void sensorPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            string bufferLine = sensorConn.sensorPort.ReadLine();
+            var bufferArray = bufferLine.Split(';');
+            // ignore the last part of the array, as it is an escape sequence and cannot be converted to double
+            var dataFragments = bufferArray.Take(bufferArray.Length - 1).Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
+
+            dataItems.Add(new SensorData { id = (int)dataFragments[0], accelX = dataFragments[1], accelY = dataFragments[2], accelZ = dataFragments[3], gyroX = dataFragments[4], gyroY = dataFragments[5], gyroZ = dataFragments[6], magnetoX = dataFragments[7], magnetoY = dataFragments[8], magnetoZ = dataFragments[9], airPressure = dataFragments[10], airTemp = dataFragments[11] });
         }
 
         // handle property changes

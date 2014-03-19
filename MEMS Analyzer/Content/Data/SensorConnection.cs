@@ -9,7 +9,12 @@ namespace MEMS_Analyzer.Content.Data
 {
     public class SensorConnection
     {
-        private SerialPort sensorPort;
+        public SensorConnection()
+        {
+            sensorPort = new SerialPort();
+        }
+
+        public SerialPort sensorPort;
 
         public string[] availablePorts
         {
@@ -21,24 +26,17 @@ namespace MEMS_Analyzer.Content.Data
 
         public bool connectPort(string port)
         {
-            sensorPort = new SerialPort(port);
+            sensorPort.PortName = port;
 
             try
             {
                 sensorPort.Open();
-                sensorPort.DataReceived += sensorPort_DataReceived;
                 return true;
             }
             catch
             {
                 return false;
             }
-        }
-
-        void sensorPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            // TODO: add data usage (explode into fragments and add to data collection)
-            System.Diagnostics.Debug.WriteLine(sensorPort.ReadLine());
         }
     }
 }
