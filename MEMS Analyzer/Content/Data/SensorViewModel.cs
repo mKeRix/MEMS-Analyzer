@@ -107,7 +107,7 @@ namespace MEMS_Analyzer.Content.Data
             if (bufferArray.Length == 13)
             {
                 // clear collection if measurement is restarted
-                if (bufferArray[0] == "0")
+                if (bufferArray[0] == "1")
                     dataItems.Clear();
 
                 // ignore the last part of the array, as it is an escape sequence and cannot be converted to double
