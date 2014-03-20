@@ -12,9 +12,11 @@ namespace MEMS_Analyzer.Content.Data
         public SensorConnection()
         {
             sensorPort = new SerialPort();
+            isConnected = false;
         }
 
         public SerialPort sensorPort { get; private set; }
+        public bool isConnected { get; private set; }
 
         public string[] availablePorts
         {
@@ -31,6 +33,22 @@ namespace MEMS_Analyzer.Content.Data
             try
             {
                 sensorPort.Open();
+                isConnected = true;
+                return true;
+            }
+            catch
+            {
+                isConnected = false;
+                return false;
+            }
+        }
+
+        public bool disconnectPort()
+        {
+            try
+            {
+                sensorPort.Close();
+                isConnected = false;
                 return true;
             }
             catch
