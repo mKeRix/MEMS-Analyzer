@@ -27,6 +27,16 @@ namespace MEMS_Analyzer.Content.Data
             ViewportAxesRangeRestriction restr = new ViewportAxesRangeRestriction();
             restr.YRange = new DisplayRange(-4.5, 4.5);
             plotter.Viewport.Restrictions.Add(restr);
+            // set checkbox legend style
+            plotterAccelX.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
+            plotterAccelY.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
+            plotterAccelZ.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
+        }
+
+        private void CheckBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            (sender as CheckBox).IsChecked = !(sender as CheckBox).IsChecked;
+            e.Handled = true;
         }
     }
 }
