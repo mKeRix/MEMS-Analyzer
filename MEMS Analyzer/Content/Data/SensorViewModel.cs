@@ -21,7 +21,7 @@ namespace MEMS_Analyzer.Content.Data
             dataItems = new ObservableCollection<SensorData>();
             dataItems.CollectionChanged += dataItems_CollectionChanged;
 
-            LoadData();
+            // LoadData();
         }
 
         public SensorConnection sensorConn { get; set; }
@@ -36,19 +36,21 @@ namespace MEMS_Analyzer.Content.Data
                 // notify of changes
                 NotifyPropertyChanged("dataItems");
                 NotifyPropertyChanged("lastItem");
-                // update any charts
-                NotifyPropertyChanged("AccelXData");
-                NotifyPropertyChanged("AccelYData");
-                NotifyPropertyChanged("AccelZData");
             }
         }
 
         public SensorData lastItem
         {
-            get { return dataItems.Last(); }
+            get 
+            {
+                if (dataItems.Count > 0)
+                    return dataItems.Last();
+                else
+                    return new SensorData();
+            }
         }
 
-        public void LoadData()
+        private void LoadData()
         {
             dataItems.Add(new SensorData { id = 0, accelX = 0.231, accelY = 0.345, accelZ = -1.234 });
             dataItems.Add(new SensorData { id = 1, accelX = 1.231, accelY = 1.345, accelZ = -0.234 });
@@ -89,7 +91,7 @@ namespace MEMS_Analyzer.Content.Data
             {
                 var xData = new EnumerableDataSource<int>(dataItems.Select(v => v.id));
                 xData.SetXMapping(x => x);
-                var yData = new EnumerableDataSource<double>(dataItems.Select(v => v.accelY));
+                var yData = new EnumerableDataSource<double>(dataItems.Select(v => v.accelZ));
                 yData.SetYMapping(y => y);
                 _AccelZData = xData.Join(yData);
                 return _AccelZData;
@@ -100,10 +102,18 @@ namespace MEMS_Analyzer.Content.Data
         {
             string bufferLine = sensorConn.sensorPort.ReadLine();
             var bufferArray = bufferLine.Split(';');
-            // ignore the last part of the array, as it is an escape sequence and cannot be converted to double
-            var dataFragments = bufferArray.Take(bufferArray.Length - 1).Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
 
-            dataItems.Add(new SensorData { id = (int)dataFragments[0], accelX = dataFragments[1], accelY = dataFragments[2], accelZ = dataFragments[3], gyroX = dataFragments[4], gyroY = dataFragments[5], gyroZ = dataFragments[6], magnetoX = dataFragments[7], magnetoY = dataFragments[8], magnetoZ = dataFragments[9], airPressure = dataFragments[10], airTemp = dataFragments[11] });
+            // check if it is a complete and valid dataset
+            if (bufferArray.Length == 13)
+            {
+                // clear collection if measurement is restarted
+                if (bufferArray[0] == "0")
+                    dataItems.Clear();
+
+                // ignore the last part of the array, as it is an escape sequence and cannot be converted to double
+                var dataFragments = bufferArray.Take(bufferArray.Length - 1).Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
+                dataItems.Add(new SensorData { id = (int)dataFragments[0], accelX = dataFragments[1], accelY = dataFragments[2], accelZ = dataFragments[3], gyroX = dataFragments[4], gyroY = dataFragments[5], gyroZ = dataFragments[6], magnetoX = dataFragments[7], magnetoY = dataFragments[8], magnetoZ = dataFragments[9], airPressure = dataFragments[10], airTemp = dataFragments[11] });
+            }    
         }
 
         // handle property changes
@@ -119,6 +129,11 @@ namespace MEMS_Analyzer.Content.Data
         {
             NotifyPropertyChanged("dataItems");
             NotifyPropertyChanged("lastItem");
+
+            // update any charts
+            NotifyPropertyChanged("AccelXData");
+            NotifyPropertyChanged("AccelYData");
+            NotifyPropertyChanged("AccelZData");
         }
     }
 }

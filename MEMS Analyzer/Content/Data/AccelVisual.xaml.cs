@@ -23,6 +23,10 @@ namespace MEMS_Analyzer.Content.Data
         public AccelVisual()
         {
             InitializeComponent();
+            // set Y axis restrictions
+            ViewportAxesRangeRestriction restr = new ViewportAxesRangeRestriction();
+            restr.YRange = new DisplayRange(-4.5, 4.5);
+            plotter.Viewport.Restrictions.Add(restr);
         }
     }
 }

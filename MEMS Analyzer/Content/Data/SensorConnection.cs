@@ -14,7 +14,7 @@ namespace MEMS_Analyzer.Content.Data
             sensorPort = new SerialPort();
         }
 
-        public SerialPort sensorPort;
+        public SerialPort sensorPort { get; private set; }
 
         public string[] availablePorts
         {

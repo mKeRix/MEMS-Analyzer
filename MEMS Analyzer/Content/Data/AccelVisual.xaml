@@ -14,9 +14,21 @@
             <d3:ChartPlotter Name="plotter" DockPanel.Dock="Top" Margin="5">
                 <d3:VerticalAxisTitle Content="Beschleunigung in g" />
                 <d3:HorizontalAxisTitle Content="Datensatz" />
-                <d3:LineGraph DataSource="{Binding AccelXData}" />
-                <d3:LineGraph DataSource="{Binding AccelYData}" />
-                <d3:LineGraph DataSource="{Binding AccelZData}" />
+                <d3:LineGraph DataSource="{Binding AccelXData}" Stroke="Blue">
+                    <d3:ViewportElement2D.Description>
+                        <d3:PenDescription DescriptionString="x-Achse" />
+                    </d3:ViewportElement2D.Description>
+                </d3:LineGraph>
+                <d3:LineGraph DataSource="{Binding AccelYData}" Stroke="Red">
+                    <d3:ViewportElement2D.Description>
+                        <d3:PenDescription DescriptionString="y-Achse" />
+                    </d3:ViewportElement2D.Description>
+                </d3:LineGraph>
+                <d3:LineGraph DataSource="{Binding AccelZData}" Stroke="Green">
+                    <d3:ViewportElement2D.Description>
+                        <d3:PenDescription DescriptionString="z-Achse" />
+                    </d3:ViewportElement2D.Description>
+                </d3:LineGraph>
             </d3:ChartPlotter>
         </DockPanel>
     </Grid>
