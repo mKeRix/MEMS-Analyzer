@@ -20,5 +20,20 @@ namespace MEMS_Analyzer.Content.Data
         public double magnetoZ { get; set; }
         public double airPressure { get; set; }
         public double airTemp { get; set; }
+
+        public double accelXMeter
+        {
+            get { return Math.Round(accelX * 9.80665, 2); }
+        }
+
+        public double accelYMeter
+        {
+            get { return Math.Round(accelY * 9.80665, 2); }
+        }
+
+        public double accelZMeter
+        {
+            get { return Math.Round(accelZ * 9.80665, 2); }
+        }
     }
 }

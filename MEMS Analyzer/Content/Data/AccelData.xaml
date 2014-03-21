@@ -11,18 +11,33 @@
         <ScrollViewer>
             <StackPanel MinWidth="200">
                 <TextBlock Text="BESCHLEUNIGUNG" Style="{StaticResource Heading2}" />
-                <TextBlock>
-                    <Run Text="x-Achse:" FontStyle="Italic" />
-                    <Run Text="{Binding lastItem.accelX}"  />
-                </TextBlock>
-                <TextBlock>
-                    <Run Text="y-Achse:" FontStyle="Italic" />
-                    <Run Text="{Binding lastItem.accelY}"  />
-                </TextBlock>
-                <TextBlock>
-                    <Run Text="z-Achse:" FontStyle="Italic" />
-                    <Run Text="{Binding lastItem.accelZ}"  />
-                </TextBlock>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="{StaticResource DataGridHeaderBackgroundHover}" Opacity="0.5" />
+                    <Rectangle Grid.Column="0" Grid.RowSpan="4" Fill="{StaticResource DataGridHeaderBackgroundHover}" Opacity="0.5" />
+                    <Rectangle Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Fill="{StaticResource DataGridCellBackgroundSelected }" Opacity="0.2" />
+                    <Label Grid.Column="1" Grid.Row="0" Content="g" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Grid.Column="2" Grid.Row="0" Content="m/s^2" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Grid.Column="0" Grid.Row="1" Content="x-Achse" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Grid.Column="1" Grid.Row="1" Content="{Binding lastItem.accelX}" HorizontalAlignment="Center" />
+                    <Label Grid.Column="2" Grid.Row="1" Content="{Binding lastItem.accelXMeter}" HorizontalAlignment="Center" />
+                    <Label Grid.Column="0" Grid.Row="2" Content="y-Achse" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Grid.Column="1" Grid.Row="2" Content="{Binding lastItem.accelY}" HorizontalAlignment="Center" />
+                    <Label Grid.Column="2" Grid.Row="2" Content="{Binding lastItem.accelYMeter}" HorizontalAlignment="Center" />
+                    <Label Grid.Column="0" Grid.Row="3" Content="z-Achse" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Grid.Column="1" Grid.Row="3" Content="{Binding lastItem.accelZ}" HorizontalAlignment="Center" />
+                    <Label Grid.Column="2" Grid.Row="3" Content="{Binding lastItem.accelZMeter}" HorizontalAlignment="Center" />
+                </Grid>
             </StackPanel>
         </ScrollViewer>
     </Grid>
