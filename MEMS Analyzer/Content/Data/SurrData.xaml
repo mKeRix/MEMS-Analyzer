@@ -4,13 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignData /SampleData/SampleSensorData.xaml}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
             <StackPanel MinWidth="200">
                 <TextBlock Text="UMGEBUNG" Style="{StaticResource Heading2}" />
-                <TextBlock Text="TODO: Tabelle einfügen" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="0" Grid.RowSpan="4" Fill="{StaticResource DataGridHeaderBackgroundHover}" Opacity="0.5" />
+                    <Rectangle Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" Fill="{StaticResource DataGridCellBackgroundSelected }" Opacity="0.2" />
+                    <Label Grid.Column="0" Grid.Row="0" Content="Luftdruck in hPa" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Grid.Column="1" Grid.Row="0" Content="{Binding lastItem.airPressure}" HorizontalAlignment="Center" />
+                    <Label Grid.Column="0" Grid.Row="1" Content="Temperatur in Grad C" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Grid.Column="1" Grid.Row="1" Content="{Binding lastItem.airTemp}" HorizontalAlignment="Center" />
+                </Grid>
             </StackPanel>
         </ScrollViewer>
     </Grid>
