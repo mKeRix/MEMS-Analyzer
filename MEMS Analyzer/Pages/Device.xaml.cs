@@ -29,23 +29,10 @@ namespace MEMS_Analyzer.Pages
         private void ButtonConnect_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = (SensorViewModel)this.DataContext;
-            // consider setting this up using MVVM
             if (!viewModel.sensorConn.isConnected)
-            {
-                if (viewModel.sensorConn.connectPort(ComboBoxPorts.Text))
-                {
-                    ButtonConnect.Content = "Trennen";
-                    ComboBoxPorts.IsEnabled = false;
-                }
-            }
+                viewModel.sensorConn.connectPort(ComboBoxPorts.Text);
             else
-            {
-                if (viewModel.sensorConn.disconnectPort())
-                {
-                    ButtonConnect.Content = "Verbinden";
-                    ComboBoxPorts.IsEnabled = true;
-                }
-            }
+                viewModel.sensorConn.disconnectPort();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MEMS_Analyzer.Content.Data
 {
-    public class SensorConnection
+    public class SensorConnection : INotifyPropertyChanged
     {
         public SensorConnection()
         {
@@ -16,7 +17,17 @@ namespace MEMS_Analyzer.Content.Data
         }
 
         public SerialPort sensorPort { get; private set; }
-        public bool isConnected { get; private set; }
+
+        private bool _isConnected;
+        public bool isConnected
+        {
+            get { return _isConnected; }
+            private set
+            {
+                _isConnected = value;
+                NotifyPropertyChanged("isConnected");
+            }
+        }
 
         public string[] availablePorts
         {
@@ -55,6 +66,14 @@ namespace MEMS_Analyzer.Content.Data
             {
                 return false;
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            var handler = this.PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

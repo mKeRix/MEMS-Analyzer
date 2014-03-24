@@ -17,6 +17,7 @@ namespace MEMS_Analyzer.Content.Data
         {
             sensorConn = new SensorConnection();
             sensorConn.sensorPort.DataReceived += sensorPort_DataReceived;
+            sensorConn.PropertyChanged += sensorConn_PropertyChanged;
 
             dataItems = new ObservableCollection<SensorData>();
             dataItems.CollectionChanged += dataItems_CollectionChanged;
@@ -25,6 +26,12 @@ namespace MEMS_Analyzer.Content.Data
         }
 
         public SensorConnection sensorConn { get; set; }
+
+        void sensorConn_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            NotifyPropertyChanged("sensorConn");
+        }
+
 
         private ObservableCollection<SensorData> _dataItems;
         public ObservableCollection<SensorData> dataItems

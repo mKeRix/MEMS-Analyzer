@@ -12,8 +12,30 @@
             <TextBlock Text="GERÄT" Style="{StaticResource Heading2}" />
             <TextBlock Text="Verbinden Sie sich mit einem 11D Sensor und stellen Sie Ihn ein, bevor wir loslegen können." TextWrapping="WrapWithOverflow" />
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <ComboBox Name="ComboBoxPorts" ItemsSource="{Binding sensorConn.availablePorts}" SelectedIndex="0" Width="120" />
-                <Button Name="ButtonConnect" Content="Verbinden" Width="100" Click="ButtonConnect_Click" Margin="30,0,0,0" />
+                <ComboBox Name="ComboBoxPorts" ItemsSource="{Binding sensorConn.availablePorts}" SelectedIndex="0" Width="120">
+                    <ComboBox.Style>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="IsEnabled" Value="True" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding sensorConn.isConnected}" Value="True">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ComboBox.Style>
+                </ComboBox>
+                <Button Name="ButtonConnect" Width="100" Click="ButtonConnect_Click" Margin="30,0,0,0">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Content" Value="Verbinden" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding sensorConn.isConnected}" Value="True">
+                                    <Setter Property="Content" Value="Trennen" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
         </StackPanel>
     </Grid>
