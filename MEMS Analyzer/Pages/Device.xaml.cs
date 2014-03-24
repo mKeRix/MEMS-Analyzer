@@ -30,9 +30,15 @@ namespace MEMS_Analyzer.Pages
         {
             var viewModel = (SensorViewModel)this.DataContext;
             if (!viewModel.sensorConn.isConnected)
-                viewModel.sensorConn.connectPort(ComboBoxPorts.Text);
+                viewModel.sensorConn.ConnectPort(ComboBoxPorts.Text);
             else
-                viewModel.sensorConn.disconnectPort();
+                viewModel.sensorConn.DisconnectPort();
+        }
+
+        private void ButtonSettingsSave_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (SensorViewModel)this.DataContext;
+            viewModel.sensorConn.SaveSettings(int.Parse(ComboBoxAccel.Text), int.Parse(ComboBoxGyro.Text), (int)SliderRefreshRate.Value);
         }
     }
 }

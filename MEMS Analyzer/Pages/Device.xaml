@@ -12,7 +12,7 @@
             <TextBlock Text="GERÄT" Style="{StaticResource Heading2}" />
             <TextBlock Text="Verbinden Sie sich mit einem 11D Sensor und stellen Sie Ihn ein, bevor wir loslegen können." TextWrapping="WrapWithOverflow" />
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <ComboBox Name="ComboBoxPorts" ItemsSource="{Binding sensorConn.availablePorts}" SelectedIndex="0" Width="120">
+                <ComboBox Name="ComboBoxPorts" ItemsSource="{Binding sensorConn.availablePorts}" SelectedIndex="0" Width="70">
                     <ComboBox.Style>
                         <Style TargetType="{x:Type ComboBox}">
                             <Setter Property="IsEnabled" Value="True" />
@@ -36,6 +36,45 @@
                         </Style>
                     </Button.Style>
                 </Button>
+            </StackPanel>
+            <StackPanel>
+                <StackPanel.Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Setter Property="Visibility" Value="Hidden" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding sensorConn.isConnected}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <Separator Margin="0,10,0,10" />
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Beschleunigungsgrenze: " FontWeight="Bold" />
+                    <ComboBox Name="ComboBoxAccel" Width="70" SelectedIndex="1">
+                        <ComboBoxItem Content="2" />
+                        <ComboBoxItem Content="4" />
+                        <ComboBoxItem Content="8" />
+                        <ComboBoxItem Content="16" />
+                    </ComboBox>
+                    <Label Content=" g" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Label Content="Gyroskopgrenze: " FontWeight="Bold" />
+                    <ComboBox Name="ComboBoxGyro" Width="70" SelectedIndex="3">
+                        <ComboBoxItem Content="250" />
+                        <ComboBoxItem Content="500" />
+                        <ComboBoxItem Content="1000" />
+                        <ComboBoxItem Content="2000" />
+                    </ComboBox>
+                    <Label Content=" Grad/s" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Label Content="Wiederholungsrate: " FontWeight="Bold" />
+                    <Slider Name="SliderRefreshRate" Maximum="1000" Minimum="10" TickFrequency="10" Width="200" Value="10" SmallChange="10" LargeChange="100" AutoToolTipPlacement="BottomRight" IsSnapToTickEnabled="True" />
+                    <Label Content=" Hz" />
+                </StackPanel>
+                <Button Name="ButtonSettingsSave" Content="Speichern" MaxWidth="100" Padding="16,3,16,5" Margin="0,10,0,0" Click="ButtonSettingsSave_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>

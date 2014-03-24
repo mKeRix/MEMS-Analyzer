@@ -17,6 +17,9 @@ namespace MEMS_Analyzer.Content.Data
         }
 
         public SerialPort sensorPort { get; private set; }
+        public int accelLimit { get; private set; }
+        public int gyroLimit { get; private set; }
+        public int refreshRate { get; private set; }
 
         private bool _isConnected;
         public bool isConnected
@@ -37,13 +40,14 @@ namespace MEMS_Analyzer.Content.Data
             }
         }
 
-        public bool connectPort(string port)
+        public bool ConnectPort(string port)
         {
             sensorPort.PortName = port;
 
             try
             {
                 sensorPort.Open();
+                sensorPort.WriteLine("default"); // hotfix to deal with settings, as they cannot be read out easily
                 isConnected = true;
                 return true;
             }
@@ -54,7 +58,7 @@ namespace MEMS_Analyzer.Content.Data
             }
         }
 
-        public bool disconnectPort()
+        public bool DisconnectPort()
         {
             try
             {
@@ -65,6 +69,23 @@ namespace MEMS_Analyzer.Content.Data
             catch
             {
                 return false;
+            }
+        }
+
+        public void SaveSettings(int _accelLimit, int _gyroLimit, int _refreshRate)
+        {
+            accelLimit = _accelLimit;
+            gyroLimit = _gyroLimit;
+            refreshRate = _refreshRate;
+
+            if (isConnected)
+            {
+                // sleep is bad (unresponsive), but we have to give the sensor time to catch up (TODO: consider using something that does not lock up the whole thread)
+                sensorPort.WriteLine("accel_fs " + accelLimit.ToString());
+                System.Threading.Thread.Sleep(20);
+                sensorPort.WriteLine("gyro_fs " + gyroLimit.ToString());
+                System.Threading.Thread.Sleep(20);
+                sensorPort.WriteLine("refresh " + refreshRate.ToString());
             }
         }
 
