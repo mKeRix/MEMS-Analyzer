@@ -16,6 +16,7 @@ namespace MEMS_Analyzer.Content.Data
         public SensorViewModel()
         {
             sensorConn = new SensorConnection();
+            bufferCache = "";
             sensorConn.sensorPort.DataReceived += sensorPort_DataReceived;
             sensorConn.PropertyChanged += sensorConn_PropertyChanged;
 
@@ -106,22 +107,41 @@ namespace MEMS_Analyzer.Content.Data
             }
         }
 
+        private string bufferCache;
         void sensorPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-            string bufferLine = sensorConn.sensorPort.ReadLine();
-            var bufferArray = bufferLine.Split(';');
+            // fill our own cache with the SerialPort data
+            bufferCache += sensorConn.sensorPort.ReadExisting();
+            var bufferArray = bufferCache.Split(new string[]{"\r\n"}, System.StringSplitOptions.None);
 
             // check if it is a complete and valid dataset
-            if (bufferArray.Length == 13)
+            foreach (string bufferLine in bufferArray)
             {
-                // clear collection if measurement is restarted
-                if (bufferArray[0] == "1")
-                    dataItems.Clear();
+                var bufferLineArray = bufferLine.Split(';');
 
-                // ignore the last part of the array, as it is an escape sequence and cannot be converted to double
-                var dataFragments = bufferArray.Take(bufferArray.Length - 1).Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
-                dataItems.Add(new SensorData { id = (int)dataFragments[0], accelX = dataFragments[1], accelY = dataFragments[2], accelZ = dataFragments[3], gyroX = dataFragments[4], gyroY = dataFragments[5], gyroZ = dataFragments[6], magnetoX = dataFragments[7], magnetoY = dataFragments[8], magnetoZ = dataFragments[9], airPressure = dataFragments[10], airTemp = dataFragments[11] });
-            }    
+                if (bufferLineArray.Length == 13)
+                {
+                    // clear collection if measurement is restarted
+                    if (bufferLineArray[0] == "1")
+                        dataItems.Clear();
+
+                    // check if it is a complete and valid dataset
+                    try
+                    {
+                        // ignore the last part of the array, as it is an escape sequence and cannot be converted to double
+                        var dataFragments = bufferLineArray.Take(bufferLineArray.Length - 1).Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
+                        dataItems.Add(new SensorData { id = (int)dataFragments[0], accelX = dataFragments[1], accelY = dataFragments[2], accelZ = dataFragments[3], gyroX = dataFragments[4], gyroY = dataFragments[5], gyroZ = dataFragments[6], magnetoX = dataFragments[7], magnetoY = dataFragments[8], magnetoZ = dataFragments[9], airPressure = dataFragments[10], airTemp = dataFragments[11] });
+                    }
+                    catch (System.FormatException)
+                    {
+                        // TODO: add error handling
+                    }
+                }
+                else
+                {
+                    bufferCache = bufferLine;
+                }
+            }
         }
 
         // handle property changes
@@ -139,6 +159,7 @@ namespace MEMS_Analyzer.Content.Data
 
             if ((lastItem.id % sensorConn.internRefreshRate) == 0)
             {
+                // create a secure copy that is updated at 10 Hz, otherwise plotting engine will complain
                 tmp_dataItems = new ObservableCollection<SensorData>(dataItems);
 
                 // update any charts
