@@ -20,6 +20,7 @@ namespace MEMS_Analyzer.Content.Data
             sensorConn.PropertyChanged += sensorConn_PropertyChanged;
 
             dataItems = new ObservableCollection<SensorData>();
+            tmp_dataItems = new ObservableCollection<SensorData>(dataItems);
             dataItems.CollectionChanged += dataItems_CollectionChanged;
 
             // LoadData();
@@ -32,7 +33,7 @@ namespace MEMS_Analyzer.Content.Data
             NotifyPropertyChanged("sensorConn");
         }
 
-
+        private ObservableCollection<SensorData> tmp_dataItems;
         private ObservableCollection<SensorData> _dataItems;
         public ObservableCollection<SensorData> dataItems
         {
@@ -68,9 +69,9 @@ namespace MEMS_Analyzer.Content.Data
         {
             get
             {
-                var xData = new EnumerableDataSource<int>(dataItems.Select(v => v.id));
+                var xData = new EnumerableDataSource<int>(tmp_dataItems.Select(v => v.id));
                 xData.SetXMapping(x => x);
-                var yData = new EnumerableDataSource<double>(dataItems.Select(v => v.accelX));
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelX));
                 yData.SetYMapping(y => y);
                 _AccelXData = xData.Join(yData);
                 return _AccelXData;
@@ -82,9 +83,9 @@ namespace MEMS_Analyzer.Content.Data
         {
             get
             {
-                var xData = new EnumerableDataSource<int>(dataItems.Select(v => v.id));
+                var xData = new EnumerableDataSource<int>(tmp_dataItems.Select(v => v.id));
                 xData.SetXMapping(x => x);
-                var yData = new EnumerableDataSource<double>(dataItems.Select(v => v.accelY));
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelY));
                 yData.SetYMapping(y => y);
                 _AccelYData = xData.Join(yData);
                 return _AccelYData; 
@@ -96,9 +97,9 @@ namespace MEMS_Analyzer.Content.Data
         {
             get
             {
-                var xData = new EnumerableDataSource<int>(dataItems.Select(v => v.id));
+                var xData = new EnumerableDataSource<int>(tmp_dataItems.Select(v => v.id));
                 xData.SetXMapping(x => x);
-                var yData = new EnumerableDataSource<double>(dataItems.Select(v => v.accelZ));
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelZ));
                 yData.SetYMapping(y => y);
                 _AccelZData = xData.Join(yData);
                 return _AccelZData;
@@ -134,13 +135,17 @@ namespace MEMS_Analyzer.Content.Data
 
         void dataItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            NotifyPropertyChanged("dataItems");
             NotifyPropertyChanged("lastItem");
 
-            // update any charts
-            NotifyPropertyChanged("AccelXData");
-            NotifyPropertyChanged("AccelYData");
-            NotifyPropertyChanged("AccelZData");
+            if ((lastItem.id % sensorConn.internRefreshRate) == 0)
+            {
+                tmp_dataItems = new ObservableCollection<SensorData>(dataItems);
+
+                // update any charts
+                NotifyPropertyChanged("AccelXData");
+                NotifyPropertyChanged("AccelYData");
+                NotifyPropertyChanged("AccelZData");
+            }
         }
     }
 }
