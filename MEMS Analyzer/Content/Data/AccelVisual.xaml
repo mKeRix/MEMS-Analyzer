@@ -26,7 +26,7 @@
             <TextBlock Text="BESCHLEUNIGUNG" Style="{StaticResource Heading2}" DockPanel.Dock="Top" />
             <d3:ChartPlotter Name="plotter" DockPanel.Dock="Top" Margin="5">
                 <d3:VerticalAxisTitle Content="Beschleunigung in g" />
-                <d3:HorizontalAxisTitle Content="Datensatz" />
+                <d3:HorizontalAxisTitle Content="Zeit in s" />
                 <d3:LineGraph Name="plotterAccelX" DataSource="{Binding AccelXData}" Stroke="Blue">
                     <d3:ViewportElement2D.Description>
                         <d3:PenDescription DescriptionString="x-Achse" />

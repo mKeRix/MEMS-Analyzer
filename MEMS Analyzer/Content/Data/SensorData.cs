@@ -21,6 +21,8 @@ namespace MEMS_Analyzer.Content.Data
         public double airPressure { get; set; }
         public double airTemp { get; set; }
 
+        public double time { get; set; }
+
         public double accelXMeter
         {
             get { return Math.Round(accelX * 9.80665, 2); }
@@ -34,6 +36,26 @@ namespace MEMS_Analyzer.Content.Data
         public double accelZMeter
         {
             get { return Math.Round(accelZ * 9.80665, 2); }
+        }
+
+        public double accelSum
+        {
+            get { return Math.Round(Math.Sqrt((accelX * accelX) + (accelY * accelY) + (accelZ * accelZ)), 2); }
+        }
+
+        public double accelSumHorizontal
+        {
+            get { return Math.Round(Math.Sqrt((accelSum * accelSum) - 1), 2); }
+        }
+
+        public double accelSumMeter
+        {
+            get { return Math.Round(accelSum * 9.80665, 2); }
+        }
+
+        public double accelSumHorizontalMeter
+        {
+            get { return Math.Round(accelSumHorizontal * 9.80665, 2); }
         }
     }
 }

@@ -70,7 +70,7 @@ namespace MEMS_Analyzer.Content.Data
         {
             get
             {
-                var xData = new EnumerableDataSource<int>(tmp_dataItems.Select(v => v.id));
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
                 xData.SetXMapping(x => x);
                 var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelX));
                 yData.SetYMapping(y => y);
@@ -84,7 +84,7 @@ namespace MEMS_Analyzer.Content.Data
         {
             get
             {
-                var xData = new EnumerableDataSource<int>(tmp_dataItems.Select(v => v.id));
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
                 xData.SetXMapping(x => x);
                 var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelY));
                 yData.SetYMapping(y => y);
@@ -98,7 +98,7 @@ namespace MEMS_Analyzer.Content.Data
         {
             get
             {
-                var xData = new EnumerableDataSource<int>(tmp_dataItems.Select(v => v.id));
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
                 xData.SetXMapping(x => x);
                 var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelZ));
                 yData.SetYMapping(y => y);
@@ -130,7 +130,7 @@ namespace MEMS_Analyzer.Content.Data
                     {
                         // ignore the last part of the array, as it is an escape sequence and cannot be converted to double
                         var dataFragments = bufferLineArray.Take(bufferLineArray.Length - 1).Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
-                        dataItems.Add(new SensorData { id = (int)dataFragments[0], accelX = dataFragments[1], accelY = dataFragments[2], accelZ = dataFragments[3], gyroX = dataFragments[4], gyroY = dataFragments[5], gyroZ = dataFragments[6], magnetoX = dataFragments[7], magnetoY = dataFragments[8], magnetoZ = dataFragments[9], airPressure = dataFragments[10], airTemp = dataFragments[11] });
+                        dataItems.Add(new SensorData { id = (int)dataFragments[0], accelX = dataFragments[1], accelY = dataFragments[2], accelZ = dataFragments[3], gyroX = dataFragments[4], gyroY = dataFragments[5], gyroZ = dataFragments[6], magnetoX = dataFragments[7], magnetoY = dataFragments[8], magnetoZ = dataFragments[9], airPressure = dataFragments[10], airTemp = dataFragments[11], time = (double)dataFragments[0] / sensorConn.refreshRate });
                     }
                     catch (System.FormatException)
                     {
