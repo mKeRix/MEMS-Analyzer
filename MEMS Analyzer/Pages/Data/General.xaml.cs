@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MEMS_Analyzer.Content.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,18 @@ namespace MEMS_Analyzer.Pages.Data
         public General()
         {
             InitializeComponent();
+        }
+
+        private void ButtonStart_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (SensorViewModel)this.DataContext;
+            viewModel.sensorConn.StartMeasure();
+        }
+
+        private void ButtonStop_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (SensorViewModel)this.DataContext;
+            viewModel.sensorConn.StopMeasure();
         }
     }
 }

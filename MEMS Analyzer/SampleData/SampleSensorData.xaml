@@ -1,9 +1,9 @@
 ﻿<vm:SensorViewModel xmlns:vm="clr-namespace:MEMS_Analyzer.Content.Data">
     <vm:SensorViewModel.dataItems>
-        <vm:SensorData  id="0" accelX="-0.154" accelY="-0.557" accelZ="0.770" gyroX="6.280" gyroY="3.902" gyroZ="-1.280" magnetoX="18.600" magnetoY="14.399" magnetoZ="45.599" airPressure="1017.095" airTemp="32.48" />
-        <vm:SensorData  id="1" accelX="-0.150" accelY="-0.357" accelZ="1.270" gyroX="6.180" gyroY="4.002" gyroZ="-1.270" magnetoX="18.300" magnetoY="14.339" magnetoZ="45.500" airPressure="1016.095" airTemp="32.28" />
-        <vm:SensorData  id="2" accelX="-0.164" accelY="-1.557" accelZ="0.270" gyroX="6.580" gyroY="2.902" gyroZ="-2.280" magnetoX="17.900" magnetoY="15.399" magnetoZ="40.549" airPressure="1017.790" airTemp="32.38" />
-        <vm:SensorData  id="3" accelX="-1.154" accelY="-0.724" accelZ="0.218" gyroX="4.213" gyroY="3.342" gyroZ="-1.234" magnetoX="11.632" magnetoY="14.334" magnetoZ="38.523" airPressure="1017.534" airTemp="32.48" />
+        <vm:SensorData  id="1" accelX="-0.154" accelY="-0.557" accelZ="0.770" gyroX="6.280" gyroY="3.902" gyroZ="-1.280" magnetoX="18.600" magnetoY="14.399" magnetoZ="45.599" airPressure="1017.095" airTemp="32.48" />
+        <vm:SensorData  id="2" accelX="-0.150" accelY="-0.357" accelZ="1.270" gyroX="6.180" gyroY="4.002" gyroZ="-1.270" magnetoX="18.300" magnetoY="14.339" magnetoZ="45.500" airPressure="1016.095" airTemp="32.28" />
+        <vm:SensorData  id="3" accelX="-0.164" accelY="-1.557" accelZ="0.270" gyroX="6.580" gyroY="2.902" gyroZ="-2.280" magnetoX="17.900" magnetoY="15.399" magnetoZ="40.549" airPressure="1017.790" airTemp="32.38" />
+        <vm:SensorData  id="4" accelX="-1.154" accelY="-0.724" accelZ="0.218" gyroX="4.213" gyroY="3.342" gyroZ="-1.234" magnetoX="11.632" magnetoY="14.334" magnetoZ="38.523" airPressure="1017.534" airTemp="32.48" />
         <vm:SensorData  id="5" accelX="-1.987" accelY="-0.307" accelZ="1.770" gyroX="8.280" gyroY="1.902" gyroZ="-0.280" magnetoX="20.600" magnetoY="13.399" magnetoZ="40.599" airPressure="1030.095" airTemp="33.48" />
     </vm:SensorViewModel.dataItems>
 </vm:SensorViewModel>

@@ -85,6 +85,40 @@ namespace MEMS_Analyzer.Content.Data
             }
         }
 
+        public void StartMeasure()
+        {
+            try
+            {
+                sensorPort.WriteLine("start");
+            }
+            catch (System.TimeoutException)
+            {
+                // port timed out
+                isConnected = false;
+            }
+            catch (System.InvalidOperationException)
+            {
+                // port is not open
+                isConnected = false;
+            }
+        }
+
+        public void StopMeasure()
+        {
+            try
+            {
+                sensorPort.WriteLine("stop");
+            }
+            catch (System.TimeoutException)
+            {
+                isConnected = false;
+            }
+            catch (System.InvalidOperationException)
+            {
+                isConnected = false;
+            }
+        }
+
         public void SaveSettings(int _accelLimit, int _gyroLimit, int _refreshRate)
         {
             accelLimit = _accelLimit;

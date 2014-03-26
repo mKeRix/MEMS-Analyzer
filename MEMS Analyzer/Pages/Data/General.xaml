@@ -5,12 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignData /SampleData/SampleSensorData.xaml}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
         <ScrollViewer>
             <StackPanel MinWidth="200">
                 <TextBlock Text="ALLGEMEINE DATEN" Style="{StaticResource Heading2}" />
-                <TextBlock Text="Hier werden später Datensatz und generelle Statuswerte zum Sensor angezeigt." />
+                <TextBlock>
+                    <Run Text="Datensatzanzahl: " FontWeight="Bold" />
+                    <Run Text="{Binding lastItem.id}" />
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Verstrichene Zeit:" FontWeight="Bold" />
+                    <Run Text="{Binding lastItem.time}" />
+                    <Run Text="s" />
+                </TextBlock>
+                <StackPanel>
+                    <Separator Margin="0,10" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="ButtonStart" Content="Start" Click="ButtonStart_Click" />
+                        <Button Name="ButtonStop" Content="Stop" Margin="10,0,0,0" Click="ButtonStop_Click" />
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>
