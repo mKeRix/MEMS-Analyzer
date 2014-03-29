@@ -59,6 +59,7 @@ namespace MEMS_Analyzer.Content.Data
                 ViewportAxesRangeRestriction restr = new ViewportAxesRangeRestriction();
                 restr.YRange = new DisplayRange(-1 * viewModel.sensorConn.accelLimit - 0.5, viewModel.sensorConn.accelLimit + 0.5);
                 plotter.Viewport.Restrictions.Add(restr);
+                plotter.FitToView();
             }
         }
     }
