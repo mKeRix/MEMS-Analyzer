@@ -23,10 +23,6 @@ namespace MEMS_Analyzer.Content.Data
         public AccelVisual()
         {
             InitializeComponent();
-            // set Y axis restrictions
-            ViewportAxesRangeRestriction restr = new ViewportAxesRangeRestriction();
-            restr.YRange = new DisplayRange(-4.5, 4.5);
-            plotter.Viewport.Restrictions.Add(restr);
             // set checkbox legend style
             plotterAccelX.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
             plotterAccelY.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
@@ -37,6 +33,33 @@ namespace MEMS_Analyzer.Content.Data
         {
             (sender as CheckBox).IsChecked = !(sender as CheckBox).IsChecked;
             e.Handled = true;
+        }
+
+        private void plotter_Loaded(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (SensorViewModel)DataContext;
+
+            // set Y axis restrictions
+            plotter.Viewport.Restrictions.Clear();
+            ViewportAxesRangeRestriction restr = new ViewportAxesRangeRestriction();
+            restr.YRange = new DisplayRange(-1 * viewModel.sensorConn.accelLimit - 0.5, viewModel.sensorConn.accelLimit + 0.5);
+            plotter.Viewport.Restrictions.Add(restr);
+
+            // kind of hacky way to subscribe to changes, but there is no proper XAML solution sadly
+            viewModel.sensorConn.PropertyChanged += sensorConn_PropertyChanged;
+        }
+
+        void sensorConn_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            var viewModel = (SensorViewModel)DataContext;
+            if (viewModel != null)
+            {
+                // set Y axis restrictions
+                plotter.Viewport.Restrictions.Clear();
+                ViewportAxesRangeRestriction restr = new ViewportAxesRangeRestriction();
+                restr.YRange = new DisplayRange(-1 * viewModel.sensorConn.accelLimit - 0.5, viewModel.sensorConn.accelLimit + 0.5);
+                plotter.Viewport.Restrictions.Add(restr);
+            }
         }
     }
 }

@@ -24,7 +24,7 @@
     <Grid Style="{StaticResource ContentRoot}">
         <DockPanel MinWidth="200">
             <TextBlock Text="BESCHLEUNIGUNG" Style="{StaticResource Heading2}" DockPanel.Dock="Top" />
-            <d3:ChartPlotter Name="plotter" DockPanel.Dock="Top" Margin="5">
+            <d3:ChartPlotter Name="plotter" DockPanel.Dock="Top" Margin="5" Loaded="plotter_Loaded">
                 <d3:VerticalAxisTitle Content="Beschleunigung in g" />
                 <d3:HorizontalAxisTitle Content="Zeit in s" />
                 <d3:LineGraph Name="plotterAccelX" DataSource="{Binding AccelXData}" Stroke="Blue">

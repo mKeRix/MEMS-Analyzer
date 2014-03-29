@@ -32,13 +32,13 @@ namespace MEMS_Analyzer.Pages.Data
 
         private void ButtonStart_Click(object sender, RoutedEventArgs e)
         {
-            var viewModel = (SensorViewModel)this.DataContext;
+            var viewModel = (SensorViewModel)DataContext;
             viewModel.sensorConn.StartMeasure();
         }
 
         private void ButtonStop_Click(object sender, RoutedEventArgs e)
         {
-            var viewModel = (SensorViewModel)this.DataContext;
+            var viewModel = (SensorViewModel)DataContext;
             viewModel.sensorConn.StopMeasure();
         }
 
