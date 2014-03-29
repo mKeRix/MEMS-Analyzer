@@ -1,4 +1,5 @@
-﻿using Microsoft.Research.DynamicDataDisplay.DataSources;
+﻿using CsvHelper.Configuration;
+using Microsoft.Research.DynamicDataDisplay.DataSources;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +25,7 @@ namespace MEMS_Analyzer.Content.Data
             tmp_dataItems = new ObservableCollection<SensorData>(dataItems);
             dataItems.CollectionChanged += dataItems_CollectionChanged;
 
-            // LoadData();
+            //LoadData();
         }
 
         public SensorConnection sensorConn { get; set; }
@@ -167,6 +168,25 @@ namespace MEMS_Analyzer.Content.Data
                 NotifyPropertyChanged("AccelYData");
                 NotifyPropertyChanged("AccelZData");
             }
+        }
+    }
+
+    public class SensorClassMap : CsvClassMap<SensorData>
+    {
+        public override void CreateMap()
+        {
+            Map(m => m.id);
+            Map(m => m.accelX);
+            Map(m => m.accelY);
+            Map(m => m.accelZ);
+            Map(m => m.gyroX);
+            Map(m => m.gyroY);
+            Map(m => m.gyroZ);
+            Map(m => m.magnetoX);
+            Map(m => m.magnetoY);
+            Map(m => m.magnetoZ);
+            Map(m => m.airPressure);
+            Map(m => m.airTemp);
         }
     }
 }

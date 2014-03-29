@@ -14,20 +14,60 @@ namespace MEMS_Analyzer.Content.Data
         {
             sensorPort = new SerialPort();
             isConnected = false;
+            accelLimit = 4;
+            gyroLimit = 2000;
+            refreshRate = 10;
+            portName = "";
         }
 
         public SerialPort sensorPort { get; private set; }
-        public int accelLimit { get; private set; }
-        public int gyroLimit { get; private set; }
+
+        private string b_portName;
+        public string portName
+        {
+            get { return b_portName; }
+            set
+            {
+                b_portName = value;
+                NotifyPropertyChanged("portName");
+            }
+        }
+
+        private int b_accelLimit;
+        public int accelLimit
+        {
+            get { return b_accelLimit; }
+            set
+            {
+                b_accelLimit = value;
+                NotifyPropertyChanged("accelLimit");
+                NotifyPropertyChanged("accelLimitItem");
+            }
+
+        }
+
+        private int b_gyroLimit;
+        public int gyroLimit
+        {
+            get { return b_gyroLimit; }
+            set
+            {
+                b_gyroLimit = value;
+                NotifyPropertyChanged("gyroLimit");
+                NotifyPropertyChanged("gyroLimitItem");
+            }
+        }
+
         public int internRefreshRate { get; private set; }
         private int b_refreshRate;
         public int refreshRate
         {
             get { return b_refreshRate; }
-            private set
+            set
             {
                 b_refreshRate = value;
                 internRefreshRate = value / 10;
+                NotifyPropertyChanged("refreshRate");
             }
         }
 
@@ -53,6 +93,7 @@ namespace MEMS_Analyzer.Content.Data
         public bool ConnectPort(string port)
         {
             sensorPort.PortName = port;
+            portName = port;
 
             try
             {
@@ -77,6 +118,7 @@ namespace MEMS_Analyzer.Content.Data
             {
                 sensorPort.Close();
                 isConnected = false;
+                portName = "";
                 return true;
             }
             catch
@@ -91,7 +133,7 @@ namespace MEMS_Analyzer.Content.Data
             {
                 sensorPort.WriteLine("start");
             }
-            catch (System.TimeoutException)
+            catch (System.IO.IOException)
             {
                 // port timed out
                 isConnected = false;
@@ -109,7 +151,7 @@ namespace MEMS_Analyzer.Content.Data
             {
                 sensorPort.WriteLine("stop");
             }
-            catch (System.TimeoutException)
+            catch (System.IO.IOException)
             {
                 isConnected = false;
             }
