@@ -52,7 +52,7 @@
                 <DockPanel LastChildFill="False">
                     <Label Content="Beschleunigungsgrenze: " FontWeight="Bold" DockPanel.Dock="Left" />
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                        <ComboBox Name="ComboBoxAccel" Width="70" SelectedIndex="1">
+                        <ComboBox Name="ComboBoxAccel" Width="70" SelectedIndex="1" Text="{Binding sensorConn.accelLimit}">
                             <ComboBoxItem Content="2" />
                             <ComboBoxItem Content="4" />
                             <ComboBoxItem Content="8" />
@@ -64,7 +64,7 @@
                 <DockPanel Margin="0,10,0,0" LastChildFill="False">
                     <Label Content="Gyroskopgrenze: " FontWeight="Bold" DockPanel.Dock="Left" />
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                        <ComboBox Name="ComboBoxGyro" Width="70" SelectedIndex="3">
+                        <ComboBox Name="ComboBoxGyro" Width="70" SelectedIndex="3" Text="{Binding sensorConn.gyroLimit}">
                             <ComboBoxItem Content="250" />
                             <ComboBoxItem Content="500" />
                             <ComboBoxItem Content="1000" />

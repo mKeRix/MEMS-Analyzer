@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MEMS_Analyzer.Content.Data
@@ -63,34 +64,72 @@ namespace MEMS_Analyzer.Content.Data
         {
             // fill our own cache with the SerialPort data
             bufferCache += sensorConn.sensorPort.ReadExisting();
-            var bufferArray = bufferCache.Split(new string[]{"\r\n"}, System.StringSplitOptions.None);
+            var bufferArray = bufferCache.Split(new string[] { "\r\n" }, System.StringSplitOptions.None);
 
-            // check if it is a complete and valid dataset
-            foreach (string bufferLine in bufferArray)
+            if (sensorConn.needStatus)
             {
-                var bufferLineArray = bufferLine.Split(';');
-
-                if (bufferLineArray.Length == 13)
+                // incredibily hacky and hardcoded (bad!) way to grab the settings, but the format supplied isn't really helpful
+                if (bufferArray.Count() >= 11)
                 {
-                    // clear collection if measurement is restarted
-                    if (bufferLineArray[0] == "1")
-                        dataItems.Clear();
+                    // read accel limit
+                    Regex regSettings = new Regex(@"Beschleunigungsgrenze: (\d+)g");
+                    var matchSettings = regSettings.Match(bufferArray[8]);
+                    if (matchSettings.Success)
+                    {
+                        var groupSettings = matchSettings.Groups;
+                        sensorConn.accelLimit = int.Parse(groupSettings[1].Captures[0].Value);
+                    }
+                    // read gyro limit
+                    regSettings = new Regex(@"Gyroscopegrenze: (\d+)Grad/s");
+                    matchSettings = regSettings.Match(bufferArray[9]);
+                    if (matchSettings.Success)
+                    {
+                        var groupSettings = matchSettings.Groups;
+                        sensorConn.gyroLimit = int.Parse(groupSettings[1].Captures[0].Value);
+                    }
+                    // read refresh rate
+                    regSettings = new Regex(@"Wiederholungsrate: (\d+)Hz");
+                    matchSettings = regSettings.Match(bufferArray[10]);
+                    if (matchSettings.Success)
+                    {
+                        var groupSettings = matchSettings.Groups;
+                        sensorConn.refreshRate = int.Parse(groupSettings[1].Captures[0].Value);
+                    }
 
-                    // check if it is a complete and valid dataset
-                    try
-                    {
-                        // ignore the last part of the array, as it is an escape sequence and cannot be converted to double
-                        var dataFragments = bufferLineArray.Take(bufferLineArray.Length - 1).Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
-                        dataItems.Add(new SensorData { id = (int)dataFragments[0], accelX = dataFragments[1], accelY = dataFragments[2], accelZ = dataFragments[3], gyroX = dataFragments[4], gyroY = dataFragments[5], gyroZ = dataFragments[6], magnetoX = dataFragments[7], magnetoY = dataFragments[8], magnetoZ = dataFragments[9], airPressure = dataFragments[10], airTemp = dataFragments[11], time = (double)dataFragments[0] / sensorConn.refreshRate });
-                    }
-                    catch (System.FormatException)
-                    {
-                        // TODO: add error handling
-                    }
+                    // empty our cache
+                    bufferCache = "";
+                    sensorConn.needStatus = false;
                 }
-                else
+            }
+            else
+            {
+                // check if it is a complete and valid dataset
+                foreach (string bufferLine in bufferArray)
                 {
-                    bufferCache = bufferLine;
+                    var bufferLineArray = bufferLine.Split(';');
+
+                    if (bufferLineArray.Length == 13)
+                    {
+                        // clear collection if measurement is restarted
+                        if (bufferLineArray[0] == "1")
+                            dataItems.Clear();
+
+                        // check if it is a complete and valid dataset
+                        try
+                        {
+                            // ignore the last part of the array, as it is an escape sequence and cannot be converted to double
+                            var dataFragments = bufferLineArray.Take(bufferLineArray.Length - 1).Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
+                            dataItems.Add(new SensorData { id = (int)dataFragments[0], accelX = dataFragments[1], accelY = dataFragments[2], accelZ = dataFragments[3], gyroX = dataFragments[4], gyroY = dataFragments[5], gyroZ = dataFragments[6], magnetoX = dataFragments[7], magnetoY = dataFragments[8], magnetoZ = dataFragments[9], airPressure = dataFragments[10], airTemp = dataFragments[11], time = (double)dataFragments[0] / sensorConn.refreshRate });
+                        }
+                        catch (System.FormatException)
+                        {
+                            // TODO: add error handling
+                        }
+                    }
+                    else
+                    {
+                        bufferCache = bufferLine;
+                    }
                 }
             }
         }

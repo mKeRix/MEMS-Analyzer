@@ -18,6 +18,7 @@ namespace MEMS_Analyzer.Content.Data
             gyroLimit = 2000;
             refreshRate = 10;
             portName = "";
+            needStatus = false;
         }
 
         public SerialPort sensorPort { get; private set; }
@@ -82,6 +83,8 @@ namespace MEMS_Analyzer.Content.Data
             }
         }
 
+        public bool needStatus { get; set; }
+
         public string[] availablePorts
         {
             get
@@ -98,11 +101,9 @@ namespace MEMS_Analyzer.Content.Data
             try
             {
                 sensorPort.Open();
-                sensorPort.WriteLine("default"); // hotfix to deal with settings, as they cannot be read out easily
-                accelLimit = 4;
-                gyroLimit = 2000;
-                refreshRate = 10;
                 isConnected = true;
+                needStatus = true;
+                sensorPort.WriteLine("status");
                 return true;
             }
             catch
