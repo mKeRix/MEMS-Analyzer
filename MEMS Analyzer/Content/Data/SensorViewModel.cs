@@ -24,8 +24,6 @@ namespace MEMS_Analyzer.Content.Data
             dataItems = new ObservableCollection<SensorData>();
             tmp_dataItems = new ObservableCollection<SensorData>(dataItems);
             dataItems.CollectionChanged += dataItems_CollectionChanged;
-
-            //LoadData();
         }
 
         public SensorConnection sensorConn { get; set; }
@@ -58,12 +56,6 @@ namespace MEMS_Analyzer.Content.Data
                 else
                     return new SensorData();
             }
-        }
-
-        private void LoadData()
-        {
-            dataItems.Add(new SensorData { id = 0, accelX = 0.231, accelY = 0.345, accelZ = -1.234 });
-            dataItems.Add(new SensorData { id = 1, accelX = 1.231, accelY = 1.345, accelZ = -0.234 });
         }
 
         private CompositeDataSource _AccelXData;

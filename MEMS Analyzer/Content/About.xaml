@@ -9,7 +9,10 @@
         <ScrollViewer>
             <StackPanel MinWidth="200">
                 <TextBlock Text="ÜBER" Style="{StaticResource Heading2}" />
-                <TextBlock Text="TODO: Informationen über Software einfügen" Margin="0,0,0,8" TextWrapping="Wrap" />
+                <TextBlock Text="Diese Software entstand im Rahmen des Informatikunterrichts als Projekt im 4. Semester. In Zusammenarbeit mit dem Fachbereich Physik soll so die Auswertung und Arbeit mit den APE 11D MEMS Sensoren erleichtert werden." Margin="0,0,0,8" TextWrapping="Wrap" />
+                <TextBlock Text="© Heiko Rothe 2014" TextWrapping="Wrap" />
+                <TextBlock Text="Mit freundlicher Unterstützung durch: StackOverflow" TextWrapping="Wrap" />
+                <TextBlock Text="Genutzte Fremdprojekte: Modern UI, Dynamic Data Display, CsvHelper" TextWrapping="Wrap" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
