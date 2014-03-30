@@ -28,7 +28,7 @@ namespace MEMS_Analyzer.Pages
 
         private void ButtonConnect_Click(object sender, RoutedEventArgs e)
         {
-            var viewModel = (SensorViewModel)this.DataContext;
+            var viewModel = (SensorViewModel)DataContext;
             if (!viewModel.sensorConn.isConnected)
                 viewModel.sensorConn.ConnectPort(ComboBoxPorts.Text);
             else
@@ -37,8 +37,14 @@ namespace MEMS_Analyzer.Pages
 
         private void ButtonSettingsSave_Click(object sender, RoutedEventArgs e)
         {
-            var viewModel = (SensorViewModel)this.DataContext;
+            var viewModel = (SensorViewModel)DataContext;
             viewModel.sensorConn.SaveSettings(int.Parse(ComboBoxAccel.Text), int.Parse(ComboBoxGyro.Text), (int)SliderRefreshRate.Value);
+        }
+
+        private void ButtonResetSettings_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (SensorViewModel)DataContext;
+            viewModel.sensorConn.ResetSettings();
         }
     }
 }

@@ -80,7 +80,10 @@
                         <Label Content=" Hz" />
                     </StackPanel>
                 </DockPanel>
-                <Button Name="ButtonSettingsSave" Content="Speichern" MaxWidth="100" Padding="16,3,16,5" Margin="0,10,0,0" Click="ButtonSettingsSave_Click" />
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
+                    <Button Name="ButtonSettingsSave" Content="Speichern" Width="120" Padding="16,3,16,5" Click="ButtonSettingsSave_Click" />
+                    <Button Name="ButtonResetSettings" Content="Zurücksetzen" Width="120" Padding="16,3,16,5" Margin="10,0,0,0" Click="ButtonResetSettings_Click" />
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>

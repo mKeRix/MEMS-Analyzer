@@ -179,6 +179,17 @@ namespace MEMS_Analyzer.Content.Data
             }
         }
 
+        public void ResetSettings()
+        {
+            if (isConnected)
+            {
+                sensorPort.WriteLine("default");
+                accelLimit = 4;
+                gyroLimit = 2000;
+                refreshRate = 10;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)
         {
