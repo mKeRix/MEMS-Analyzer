@@ -54,7 +54,7 @@ namespace MEMS_Analyzer.Pages.Data
             if (dialog.FileName != "")
             {
                 StreamWriter writer = new StreamWriter(dialog.FileName);
-                writer.WriteLine(String.Format("Sensor: 2    Frequenz: {0}Hz    Beschleunigungsgrenze: {1}g    Gyroscopegrenze: {2}Grad/s", viewModel.sensorConn.refreshRate, viewModel.sensorConn.accelLimit, viewModel.sensorConn.gyroLimit));
+                writer.WriteLine(String.Format("Sensor: 1337    Frequenz: {0}Hz    Beschleunigungsgrenze: {1}g    Gyroscopegrenze: {2}Grad/s", viewModel.sensorConn.refreshRate, viewModel.sensorConn.accelLimit, viewModel.sensorConn.gyroLimit));
                 writer.WriteLine("");
 
                 using (var csv = new CsvWriter(writer))
@@ -83,6 +83,7 @@ namespace MEMS_Analyzer.Pages.Data
             if (dialog.FileName != "")
             {
                 StreamReader reader = new StreamReader(dialog.FileName);
+                string fileFormat = "";
 
                 // read first line as it cointains config values
                 Regex regSettings = new Regex(@"Sensor: (\d+)    Frequenz: (\d+)Hz    Beschleunigungsgrenze: (\d+)g    Gyroscopegrenze: (\d+)Grad/s");
@@ -90,6 +91,7 @@ namespace MEMS_Analyzer.Pages.Data
                 if (matchSettings.Success)
                 {
                     var groupSettings = matchSettings.Groups;
+                    fileFormat = groupSettings[1].Captures[0].Value;
                     viewModel.sensorConn.refreshRate = int.Parse(groupSettings[2].Captures[0].Value);
                     viewModel.sensorConn.accelLimit = int.Parse(groupSettings[3].Captures[0].Value);
                     viewModel.sensorConn.gyroLimit = int.Parse(groupSettings[4].Captures[0].Value);
@@ -105,7 +107,9 @@ namespace MEMS_Analyzer.Pages.Data
                     csv.Configuration.QuoteNoFields = true;
                     csv.Configuration.HasHeaderRecord = false;
                     csv.Configuration.SkipEmptyRecords = true;
-                    csv.Configuration.CultureInfo = System.Globalization.CultureInfo.InvariantCulture;
+
+                    if (fileFormat != "1337")
+                        csv.Configuration.CultureInfo = System.Globalization.CultureInfo.InvariantCulture;
 
                     while (csv.Read())
                     {

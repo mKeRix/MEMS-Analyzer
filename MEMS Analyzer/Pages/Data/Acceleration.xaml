@@ -10,7 +10,7 @@
         <mui:ModernTab Layout="Tab" SelectedSource="/Content/Data/AccelData.xaml">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="DATEN" Source="/Content/Data/AccelData.xaml" />
-                <mui:Link DisplayName="VISUELL" Source="/Content/Data/AccelVisual.xaml" />
+                <mui:Link DisplayName="VISUELL" Source="/Pages/Data/AccelVisual.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

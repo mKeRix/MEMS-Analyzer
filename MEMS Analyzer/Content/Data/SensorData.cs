@@ -45,7 +45,17 @@ namespace MEMS_Analyzer.Content.Data
 
         public double accelSumHorizontal
         {
-            get { return Math.Round(Math.Sqrt((accelSum * accelSum) - 1), 2); }
+            get 
+            {
+                if (Double.IsNaN(Math.Sqrt((accelSum * accelSum) - 1)))
+                {
+                    return 0;
+                }
+                else
+                {
+                    return Math.Round(Math.Sqrt((accelSum * accelSum) - 1), 2);
+                }
+            }
         }
 
         public double accelSumMeter

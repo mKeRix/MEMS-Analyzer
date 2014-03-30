@@ -58,48 +58,6 @@ namespace MEMS_Analyzer.Content.Data
             }
         }
 
-        private CompositeDataSource _AccelXData;
-        public CompositeDataSource AccelXData
-        {
-            get
-            {
-                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
-                xData.SetXMapping(x => x);
-                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelX));
-                yData.SetYMapping(y => y);
-                _AccelXData = xData.Join(yData);
-                return _AccelXData;
-            }
-        }
-
-        private CompositeDataSource _AccelYData;
-        public CompositeDataSource AccelYData
-        {
-            get
-            {
-                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
-                xData.SetXMapping(x => x);
-                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelY));
-                yData.SetYMapping(y => y);
-                _AccelYData = xData.Join(yData);
-                return _AccelYData; 
-            }
-        }
-
-        private CompositeDataSource _AccelZData;
-        public CompositeDataSource AccelZData
-        {
-            get
-            {
-                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
-                xData.SetXMapping(x => x);
-                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelZ));
-                yData.SetYMapping(y => y);
-                _AccelZData = xData.Join(yData);
-                return _AccelZData;
-            }
-        }
-
         private string bufferCache;
         void sensorPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
@@ -159,12 +117,285 @@ namespace MEMS_Analyzer.Content.Data
                 NotifyPropertyChanged("AccelXData");
                 NotifyPropertyChanged("AccelYData");
                 NotifyPropertyChanged("AccelZData");
+                NotifyPropertyChanged("AccelXMeterData");
+                NotifyPropertyChanged("AccelYMeterData");
+                NotifyPropertyChanged("AccelZMeterData");
+                NotifyPropertyChanged("AccelSumData");
+                NotifyPropertyChanged("AccelSumHorData");
+                NotifyPropertyChanged("AccelSumMeterData");
+                NotifyPropertyChanged("AccelSumHorData");
+
+                NotifyPropertyChanged("GyroXData");
+                NotifyPropertyChanged("GyroYData");
+                NotifyPropertyChanged("GyroZData");
+
+                NotifyPropertyChanged("MagnetoXData");
+                NotifyPropertyChanged("MagnetoYData");
+                NotifyPropertyChanged("MagnetoZData");
+
+                NotifyPropertyChanged("PressureData");
+                NotifyPropertyChanged("TemperatureData");
+            }
+        }
+
+        // All the diagram sources
+
+        private CompositeDataSource _AccelXData;
+        public CompositeDataSource AccelXData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelX));
+                yData.SetYMapping(y => y);
+                _AccelXData = xData.Join(yData);
+                return _AccelXData;
+            }
+        }
+
+        private CompositeDataSource _AccelYData;
+        public CompositeDataSource AccelYData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelY));
+                yData.SetYMapping(y => y);
+                _AccelYData = xData.Join(yData);
+                return _AccelYData;
+            }
+        }
+
+        private CompositeDataSource _AccelZData;
+        public CompositeDataSource AccelZData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelZ));
+                yData.SetYMapping(y => y);
+                _AccelZData = xData.Join(yData);
+                return _AccelZData;
+            }
+        }
+
+        private CompositeDataSource _AccelXMeterData;
+        public CompositeDataSource AccelXMeterData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelXMeter));
+                yData.SetYMapping(y => y);
+                _AccelXMeterData = xData.Join(yData);
+                return _AccelXMeterData;
+            }
+        }
+
+        private CompositeDataSource _AccelYMeterData;
+        public CompositeDataSource AccelYMeterData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelYMeter));
+                yData.SetYMapping(y => y);
+                _AccelYMeterData = xData.Join(yData);
+                return _AccelYMeterData;
+            }
+        }
+
+        private CompositeDataSource _AccelZMeterData;
+        public CompositeDataSource AccelZMeterData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelZMeter));
+                yData.SetYMapping(y => y);
+                _AccelZMeterData = xData.Join(yData);
+                return _AccelZMeterData;
+            }
+        }
+
+        private CompositeDataSource _AccelSumData;
+        public CompositeDataSource AccelSumData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelSum));
+                yData.SetYMapping(y => y);
+                _AccelSumData = xData.Join(yData);
+                return _AccelSumData;
+            }
+        }
+
+        private CompositeDataSource _AccelSumHorData;
+        public CompositeDataSource AccelSumHorData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelSumHorizontal));
+                yData.SetYMapping(y => y);
+                _AccelSumHorData = xData.Join(yData);
+                return _AccelSumHorData;
+            }
+        }
+
+        private CompositeDataSource _AccelSumMeterData;
+        public CompositeDataSource AccelSumMeterData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelSumMeter));
+                yData.SetYMapping(y => y);
+                _AccelSumMeterData = xData.Join(yData);
+                return _AccelSumMeterData;
+            }
+        }
+
+        private CompositeDataSource _AccelSumHorMeterData;
+        public CompositeDataSource AccelSumHorMeterData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.accelSumHorizontalMeter));
+                yData.SetYMapping(y => y);
+                _AccelSumHorMeterData = xData.Join(yData);
+                return _AccelSumHorMeterData;
+            }
+        }
+
+        private CompositeDataSource _GyroXData;
+        public CompositeDataSource GyroXData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.gyroX));
+                yData.SetYMapping(y => y);
+                _GyroXData = xData.Join(yData);
+                return _GyroXData;
+            }
+        }
+
+        private CompositeDataSource _GyroYData;
+        public CompositeDataSource GyroYData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.gyroY));
+                yData.SetYMapping(y => y);
+                _GyroYData = xData.Join(yData);
+                return _GyroYData;
+            }
+        }
+
+        private CompositeDataSource _GyroZData;
+        public CompositeDataSource GyroZData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.gyroZ));
+                yData.SetYMapping(y => y);
+                _GyroZData = xData.Join(yData);
+                return _GyroZData;
+            }
+        }
+
+        private CompositeDataSource _MagnetoXData;
+        public CompositeDataSource MagnetoXData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.magnetoX));
+                yData.SetYMapping(y => y);
+                _MagnetoXData = xData.Join(yData);
+                return _MagnetoXData;
+            }
+        }
+
+        private CompositeDataSource _MagnetoYData;
+        public CompositeDataSource MagnetoYData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.magnetoY));
+                yData.SetYMapping(y => y);
+                _MagnetoYData = xData.Join(yData);
+                return _MagnetoYData;
+            }
+        }
+
+        private CompositeDataSource _MagnetoZData;
+        public CompositeDataSource MagnetoZData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.magnetoZ));
+                yData.SetYMapping(y => y);
+                _MagnetoZData = xData.Join(yData);
+                return _MagnetoZData;
+            }
+        }
+
+        private CompositeDataSource _PressureData;
+        public CompositeDataSource PressureData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.airPressure));
+                yData.SetYMapping(y => y);
+                _PressureData = xData.Join(yData);
+                return _PressureData;
+            }
+        }
+
+        private CompositeDataSource _TemperatureData;
+        public CompositeDataSource TemperatureData
+        {
+            get
+            {
+                var xData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.time));
+                xData.SetXMapping(x => x);
+                var yData = new EnumerableDataSource<double>(tmp_dataItems.Select(v => v.airTemp));
+                yData.SetYMapping(y => y);
+                _TemperatureData = xData.Join(yData);
+                return _TemperatureData;
             }
         }
     }
 
     public class SensorClassMap : CsvClassMap<SensorData>
     {
+        [Obsolete("The parent of this method is obsolete and will be removed in the next release.")]
         public override void CreateMap()
         {
             Map(m => m.id);

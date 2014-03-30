@@ -40,7 +40,7 @@
                     <Label Grid.Column="0" Grid.Row="3" Content="z-Achse" FontWeight="Bold" HorizontalAlignment="Center" />
                     <Label Grid.Column="1" Grid.Row="3" Content="{Binding lastItem.accelZ}" HorizontalAlignment="Center" />
                     <Label Grid.Column="2" Grid.Row="3" Content="{Binding lastItem.accelZMeter}" HorizontalAlignment="Center" />
-                    <Label Grid.Column="0" Grid.Row="4" Content="Betrag" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Grid.Column="0" Grid.Row="4" Content="Gesamt" FontWeight="Bold" HorizontalAlignment="Center" />
                     <Label Grid.Column="1" Grid.Row="4" Content="{Binding lastItem.accelSum}" HorizontalAlignment="Center" />
                     <Label Grid.Column="2" Grid.Row="4" Content="{Binding lastItem.accelSumMeter}" HorizontalAlignment="Center" />
                     <Label Grid.Column="0" Grid.Row="5" Content="Horizontal" FontWeight="Bold" HorizontalAlignment="Center" />

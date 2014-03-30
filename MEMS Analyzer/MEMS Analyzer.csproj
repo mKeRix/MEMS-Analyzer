@@ -81,15 +81,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Content\Data\AccelVisualSumMeter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\Data\AccelData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Data\AccelVisual.xaml">
+    <Page Include="Content\Data\AccelVisualG.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Data\SurrVisual.xaml">
+    <Page Include="Content\Data\AccelVisualMeter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Data\AccelVisualSumG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Data\SurrVisualPressure.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,22 +125,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\Data\SurrVisualTemperature.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Content\Data\AccelVisualSumMeter.xaml.cs">
+      <DependentUpon>AccelVisualSumMeter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\Data\AccelData.xaml.cs">
       <DependentUpon>AccelData.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Data\AccelVisual.xaml.cs">
-      <DependentUpon>AccelVisual.xaml</DependentUpon>
+    <Compile Include="Content\Data\AccelVisualG.xaml.cs">
+      <DependentUpon>AccelVisualG.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Data\AccelVisualMeter.xaml.cs">
+      <DependentUpon>AccelVisualMeter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Data\AccelVisualSumG.xaml.cs">
+      <DependentUpon>AccelVisualSumG.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Data\DisplayRange.cs" />
     <Compile Include="Content\Data\SensorConnection.cs" />
     <Compile Include="Content\Data\SensorData.cs" />
     <Compile Include="Content\Data\SensorViewModel.cs" />
-    <Compile Include="Content\Data\SurrVisual.xaml.cs">
-      <DependentUpon>SurrVisual.xaml</DependentUpon>
+    <Compile Include="Content\Data\SurrVisualPressure.xaml.cs">
+      <DependentUpon>SurrVisualPressure.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Data\GyroData.xaml.cs">
       <DependentUpon>GyroData.xaml</DependentUpon>
@@ -144,6 +169,9 @@
     </Compile>
     <Compile Include="Content\Data\SurrData.xaml.cs">
       <DependentUpon>SurrData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Data\SurrVisualTemperature.xaml.cs">
+      <DependentUpon>SurrVisualTemperature.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -164,6 +192,10 @@
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\SettingsAppearanceViewModel.cs" />
+    <Page Include="Pages\Data\AccelVisual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Data\Gyroscope.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Data\Surroundings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Data\SurrVisual.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,6 +232,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Pages\Data\AccelVisual.xaml.cs">
+      <DependentUpon>AccelVisual.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Data\Gyroscope.xaml.cs">
       <DependentUpon>Gyroscope.xaml</DependentUpon>
     </Compile>
@@ -204,6 +243,9 @@
     </Compile>
     <Compile Include="Pages\Data\Surroundings.xaml.cs">
       <DependentUpon>Surroundings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Data\SurrVisual.xaml.cs">
+      <DependentUpon>SurrVisual.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Device.xaml.cs">
       <DependentUpon>Device.xaml</DependentUpon>

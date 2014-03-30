@@ -16,17 +16,15 @@ using System.Windows.Shapes;
 namespace MEMS_Analyzer.Content.Data
 {
     /// <summary>
-    /// Interaction logic for MagnetoVisual.xaml
+    /// Interaction logic for BasicPage1.xaml
     /// </summary>
-    public partial class MagnetoVisual : UserControl
+    public partial class SurrVisualPressure : UserControl
     {
-        public MagnetoVisual()
+        public SurrVisualPressure()
         {
             InitializeComponent();
             // set checkbox legend style
-            plotterMagnetoX.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
-            plotterMagnetoY.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
-            plotterMagnetoZ.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
+            plotterPressure.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
         }
 
         private void CheckBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -40,7 +38,7 @@ namespace MEMS_Analyzer.Content.Data
             // set Y axis restrictions
             plotter.Viewport.Restrictions.Clear();
             ViewportAxesRangeRestriction restr = new ViewportAxesRangeRestriction();
-            restr.YRange = new DisplayRange(-1300, 1300);
+            restr.YRange = new DisplayRange(900, 1100);
             plotter.Viewport.Restrictions.Add(restr);
         }
     }

@@ -24,7 +24,7 @@
                     <Rectangle Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" Fill="{StaticResource DataGridCellBackgroundSelected }" Opacity="0.2" />
                     <Label Grid.Column="0" Grid.Row="0" Content="Luftdruck in hPa" FontWeight="Bold" HorizontalAlignment="Center" />
                     <Label Grid.Column="1" Grid.Row="0" Content="{Binding lastItem.airPressure}" HorizontalAlignment="Center" />
-                    <Label Grid.Column="0" Grid.Row="1" Content="Temperatur in Grad C" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Grid.Column="0" Grid.Row="1" Content="Temperatur in °C" FontWeight="Bold" HorizontalAlignment="Center" />
                     <Label Grid.Column="1" Grid.Row="1" Content="{Binding lastItem.airTemp}" HorizontalAlignment="Center" />
                 </Grid>
             </StackPanel>

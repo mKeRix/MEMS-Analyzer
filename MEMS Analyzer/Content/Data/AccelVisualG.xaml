@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MEMS_Analyzer.Content.Data.MagnetoVisual"
+﻿<UserControl x:Class="MEMS_Analyzer.Content.Data.AccelVisual"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -20,24 +20,24 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-
+    
     <Grid Style="{StaticResource ContentRoot}">
         <DockPanel MinWidth="200">
-            <TextBlock Text="MAGNETISCHE FLUSSDICHTE" Style="{StaticResource Heading2}" DockPanel.Dock="Top" />
+            <TextBlock Text="ACHSENBESCHLEUNIGUNG" Style="{StaticResource Heading2}" DockPanel.Dock="Top" />
             <d3:ChartPlotter Name="plotter" DockPanel.Dock="Top" Margin="5" Loaded="plotter_Loaded">
-                <d3:VerticalAxisTitle Content="Flussdichte in uT" />
+                <d3:VerticalAxisTitle Content="Beschleunigung in g" />
                 <d3:HorizontalAxisTitle Content="Zeit in s" />
-                <d3:LineGraph Name="plotterMagnetoX" DataSource="{Binding MagnetoXData}" Stroke="Blue">
+                <d3:LineGraph Name="plotterAccelX" DataSource="{Binding AccelXData}" Stroke="Blue">
                     <d3:ViewportElement2D.Description>
                         <d3:PenDescription DescriptionString="x-Achse" />
                     </d3:ViewportElement2D.Description>
                 </d3:LineGraph>
-                <d3:LineGraph Name="plotterMagnetoY" DataSource="{Binding MagnetoYData}" Stroke="Red">
+                <d3:LineGraph Name="plotterAccelY" DataSource="{Binding AccelYData}" Stroke="Red">
                     <d3:ViewportElement2D.Description>
                         <d3:PenDescription DescriptionString="y-Achse" />
                     </d3:ViewportElement2D.Description>
                 </d3:LineGraph>
-                <d3:LineGraph Name="plotterMagnetoZ" DataSource="{Binding MagnetoZData}" Stroke="Green">
+                <d3:LineGraph Name="plotterAccelZ" DataSource="{Binding AccelZData}" Stroke="Green">
                     <d3:ViewportElement2D.Description>
                         <d3:PenDescription DescriptionString="z-Achse" />
                     </d3:ViewportElement2D.Description>

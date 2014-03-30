@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MEMS_Analyzer.Content.Data
+namespace MEMS_Analyzer.Pages.Data
 {
     /// <summary>
-    /// Interaction logic for BasicPage1.xaml
+    /// Interaction logic for AccelVisual.xaml
     /// </summary>
-    public partial class BasicPage1 : UserControl
+    public partial class AccelVisual : UserControl
     {
-        public BasicPage1()
+        public AccelVisual()
         {
             InitializeComponent();
         }

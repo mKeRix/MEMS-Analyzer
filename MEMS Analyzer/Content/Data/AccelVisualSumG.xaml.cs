@@ -16,17 +16,16 @@ using System.Windows.Shapes;
 namespace MEMS_Analyzer.Content.Data
 {
     /// <summary>
-    /// Interaction logic for GyroVisual.xaml
+    /// Interaction logic for AccelVisualSumG.xaml
     /// </summary>
-    public partial class GyroVisual : UserControl
+    public partial class AccelVisualSumG : UserControl
     {
-        public GyroVisual()
+        public AccelVisualSumG()
         {
             InitializeComponent();
             // set checkbox legend style
-            plotterGyroX.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
-            plotterGyroY.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
-            plotterGyroZ.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
+            plotterAccelSum.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
+            plotterAccelSumHor.Description.LegendItem.ContentTemplate = this.FindResource("LineLegendItemContentTemplate") as DataTemplate;
         }
 
         private void CheckBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -42,7 +41,7 @@ namespace MEMS_Analyzer.Content.Data
             // set Y axis restrictions
             plotter.Viewport.Restrictions.Clear();
             ViewportAxesRangeRestriction restr = new ViewportAxesRangeRestriction();
-            restr.YRange = new DisplayRange(-1 * viewModel.sensorConn.gyroLimit - 100, viewModel.sensorConn.gyroLimit + 100);
+            restr.YRange = new DisplayRange(0, Math.Sqrt(Math.Pow(viewModel.sensorConn.accelLimit * viewModel.sensorConn.accelLimit, 2)) + 1);
             plotter.Viewport.Restrictions.Add(restr);
 
             // kind of hacky way to subscribe to changes, but there is no proper XAML solution sadly
@@ -57,7 +56,7 @@ namespace MEMS_Analyzer.Content.Data
                 // set Y axis restrictions
                 plotter.Viewport.Restrictions.Clear();
                 ViewportAxesRangeRestriction restr = new ViewportAxesRangeRestriction();
-                restr.YRange = new DisplayRange(-1 * viewModel.sensorConn.gyroLimit - 100, viewModel.sensorConn.gyroLimit + 100);
+                restr.YRange = new DisplayRange(0, Math.Sqrt(Math.Pow(viewModel.sensorConn.accelLimit * viewModel.sensorConn.accelLimit, 2)) + 1);
                 plotter.Viewport.Restrictions.Add(restr);
                 plotter.FitToView();
             }

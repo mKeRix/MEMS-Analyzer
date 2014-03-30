@@ -4,14 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" 
+             xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
+             xmlns:local="clr-namespace:MEMS_Analyzer.Content.Data"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignData /SampleData/SampleSensorData.xaml}"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Style="{StaticResource ContentRoot}">
-        <ScrollViewer>
-            <StackPanel MinWidth="200">
-                <TextBlock Text="GYROSENSOR" Style="{StaticResource Heading2}" />
-                <TextBlock Text="TODO: Diagramm einfügen" />
+    <UserControl.Resources>
+        <local:VisibilityToCheckedConverter x:Key="VisibilityToCheckedConverter"/>
+        <DataTemplate x:Key="LineLegendItemContentTemplate" DataType="{x:Type d3:LineLegendItem}">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox PreviewMouseLeftButtonDown="CheckBox_PreviewMouseLeftButtonDown" IsChecked="{Binding Path=ViewportElement.Visibility, Converter={StaticResource VisibilityToCheckedConverter}, Mode=TwoWay}"/>
+                <Line Width="15" Height="10" X1="0" Y1="10" X2="15" Y2="0" Stroke="{Binding Pen.Brush}" 
+					    StrokeThickness="{Binding Pen.Thickness}" Margin="2,1,2,1"/>
+                <TextBlock Margin="5,0,0,0" Text="{Binding Brief}"/>
             </StackPanel>
-        </ScrollViewer>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Style="{StaticResource ContentRoot}">
+        <DockPanel MinWidth="200">
+            <TextBlock Text="WINKELGESCHWINDIGKEIT" Style="{StaticResource Heading2}" DockPanel.Dock="Top" />
+            <d3:ChartPlotter Name="plotter" DockPanel.Dock="Top" Margin="5" Loaded="plotter_Loaded">
+                <d3:VerticalAxisTitle Content="Geschwindigkeit in Grad/s" />
+                <d3:HorizontalAxisTitle Content="Zeit in s" />
+                <d3:LineGraph Name="plotterGyroX" DataSource="{Binding GyroXData}" Stroke="Blue">
+                    <d3:ViewportElement2D.Description>
+                        <d3:PenDescription DescriptionString="x-Achse" />
+                    </d3:ViewportElement2D.Description>
+                </d3:LineGraph>
+                <d3:LineGraph Name="plotterGyroY" DataSource="{Binding GyroYData}" Stroke="Red">
+                    <d3:ViewportElement2D.Description>
+                        <d3:PenDescription DescriptionString="y-Achse" />
+                    </d3:ViewportElement2D.Description>
+                </d3:LineGraph>
+                <d3:LineGraph Name="plotterGyroZ" DataSource="{Binding GyroZData}" Stroke="Green">
+                    <d3:ViewportElement2D.Description>
+                        <d3:PenDescription DescriptionString="z-Achse" />
+                    </d3:ViewportElement2D.Description>
+                </d3:LineGraph>
+            </d3:ChartPlotter>
+        </DockPanel>
     </Grid>
 </UserControl>
