@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -11,8 +12,9 @@
                 <TextBlock Text="ÜBER" Style="{StaticResource Heading2}" />
                 <TextBlock Text="Diese Software entstand im Rahmen des Informatikunterrichts als Projekt im 4. Semester. In Zusammenarbeit mit dem Fachbereich Physik soll so die Auswertung und Arbeit mit den APE 11D MEMS Sensoren erleichtert werden." Margin="0,0,0,8" TextWrapping="Wrap" />
                 <TextBlock Text="© Heiko Rothe 2014" TextWrapping="Wrap" />
-                <TextBlock Text="Mit freundlicher Unterstützung durch: StackOverflow" TextWrapping="Wrap" />
-                <TextBlock Text="Genutzte Fremdprojekte: Modern UI, Dynamic Data Display, CsvHelper" TextWrapping="Wrap" />
+                <mui:BBCodeBlock BBCode="Mit freundlicher Unterstützung durch: Hr. Pechstein, Hr. Tautermann, [url=http://stackoverflow.com/]StackOverflow.com[/url]" />
+                <mui:BBCodeBlock BBCode="Genutzte Fremdprojekte: [url=https://mui.codeplex.com/]Modern UI[/url], [url=https://dynamicdatadisplay.codeplex.com/]Dynamic Data Display[/url], [url=http://joshclose.github.io/CsvHelper/]CsvHelper[/url]" />
+                <mui:BBCodeBlock BBCode="[url=https://github.com/mKeRix/MEMS-Analyzer]Finden Sie uns auf GitHub![/url]" HorizontalAlignment="Center" Margin="0,10,0,0" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
